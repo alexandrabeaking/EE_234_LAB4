@@ -77,6 +77,7 @@ void Initialize_SVD()
 	*((uint32_t*)DIG4_ADDRESS) = 0x0;
 	*((uint32_t*)SVN_SEG_DP) = 0x1;
 	START=0;
+	//I think I need to add some code here that
 	return;
 }
 
@@ -243,6 +244,13 @@ uint32_t BTN4=0x40000;
 delay(100000); // button rebounce
 	if (button_press == BTN5)
 	{
+		*((uint32_t*) GT_COUNTER0_ADDRESS) = 0x00000000; // Set the Counter to zero
+		*((uint32_t*) GT_COUNTER1_ADDRESS) = 0x00000000;
+		*((uint32_t*) GT_CONTROL_ADDRESS) = 0x0;
+		*((uint32_t*) GT_INTSTAT_ADDRESS) = 0x1;
+		//*((uint32_t*) GT_INTSTAT_ADDRESS) = 0x00000001; // set the interrupt to be cleared.
+		//*((uint32_t*) GPIO_INT_STAT_1) = 0xFFFFFFFF; // Clear Status register
+		//*((uint32_t*) ICDICER_BASEADDR) = 0x08000000; // clear interrupt ID 27
 		Initialize_SVD();
 	// Enter your code to reset SVD and Timer
 	}
@@ -256,10 +264,14 @@ delay(100000); // button rebounce
 				}
 			else {
 					START=0;
+					*((uint32_t*) GT_CONTROL_ADDRESS) = 0x0;
+					*((uint32_t*) GT_INTSTAT_ADDRESS) = 0x0;
 				}
+
 	}
 
 *((uint32_t*)GPIO_INT_STAT_1) = 0xFFFFFF;
+
 }
 
 
@@ -270,4 +282,5 @@ int k = 0;
 while (k<i)
 k++;
 }
+
 
