@@ -76,6 +76,10 @@ void Initialize_SVD()
 	*((uint32_t*)DIG3_ADDRESS) = 0x0;
 	*((uint32_t*)DIG4_ADDRESS) = 0x0;
 	*((uint32_t*)SVN_SEG_DP) = 0x1;
+	*((uint32_t*)D1) =0;
+	*((uint32_t*)D2) =0;
+	*((uint32_t*)D3) =0;
+	*((uint32_t*)D4) =0;
 	START=0;
 	//I think I need to add some code here that
 	return;
